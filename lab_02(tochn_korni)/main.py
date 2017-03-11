@@ -3,7 +3,7 @@ a = -2#int(input("Введите начало отрезка: "))
 b = 5#int(input("Введите конец отрезка: "))
 h = 0.5#float(input("Введите шаг: "))
 n = 10#int(input("Введите максимальное количество итерраций: "))
-eps1 = 0.01#float(input("Введите первую точность: "))
+eps1 = 0.1#float(input("Введите первую точность: "))
 eps2 = 0.01#float(input("Введите вторую точность: "))
 
 #Шаги.
@@ -35,7 +35,8 @@ while a < b:
             #print(x0)
             #print(pred_znach, sled_znach)
             number_of_root += 1
-            fc.vivod(x0, number_of_root, pred_znach, sled_znach)
+            function = fc.func(x0)
+            fc.vivod(x0, number_of_root, pred_znach, sled_znach, function, i)
         else:
             #print("proverca_2")
             #print(proverca_1, proverca_2)
@@ -50,4 +51,5 @@ while a < b:
                     break
             #print(x1)
             number_of_root += 1
-            fc.vivod(x1, number_of_root, pred_znach, sled_znach)
+            function = fc.func(x1)
+            fc.vivod(x1, number_of_root, pred_znach, sled_znach, function, i)
