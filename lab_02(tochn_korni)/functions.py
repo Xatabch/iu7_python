@@ -1,10 +1,11 @@
+import math as mt
 def func(x):
     return (x**2 - 3)#(x**3 + 4*x - 3)
 def proizv_func(x):
     return (2 * x)#(3 * x ** 2 + 4)
 def second_proizv(x):
     function = (x**2 - 3)#x ** 3 + 4 * x - 3
-    second = 2 #6 * x
+    second = 2#6 * x
     result = function * second
     if result > 0:
         return 1
