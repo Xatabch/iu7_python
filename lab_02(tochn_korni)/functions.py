@@ -13,9 +13,9 @@ def second_proizv(x):
 def newton1(x):
     x = x - func(x) / proizv_func(x)
     return x
-def vivod(x, number_of_root, pred_znach, sled_znach, function, i):
+def vivod(x, number_of_root, pred_znach, sled_znach, function, i, error):
     if x >= 0:
-        print('{:>10} | {:<5}{:>5} | {:>10.7f} | {:<5.7f} | {:^5} |'.format(number_of_root, pred_znach, sled_znach, x, function, i))
+        print('{:>10} | {:<5}{:>5} | {:>10.7f} | {:<5.7f} | {:^5} | {:^5} |'.format(number_of_root, pred_znach, sled_znach, x, function, i, error))
     else:
-        print('{:>10} | {:<5}{:>5} | {:<5.7f} | {:<5.7f} | {:^5} |'.format(number_of_root, pred_znach, sled_znach, x, function, i))
+        print('{:>10} | {:<5}{:>5} | {:<5.7f} | {:<5.7f} | {:^5} | {:^5} |'.format(number_of_root, pred_znach, sled_znach, x, function, i, error))
     

@@ -5,8 +5,14 @@ h = 0.5#float(input("Введите шаг: "))
 n = 10#int(input("Введите максимальное количество итерраций: "))
 eps1 = 0.1#float(input("Введите первую точность: "))
 eps2 = 0.01#float(input("Введите вторую точность: "))
-print('{:>10s} | {:<5s}{:>5s}| {:^10s} | {:^9s} | {:^5s} |'.format('№', 'X(n)', 'X(n+1)', 'X', 'f(X)', 'n'))
-print('         -------------------------------------------------')
+error = 0
+print("""
+         Коды ошибок:
+         0 - нет ошибок
+         1 - превышено максимальное число итерраций
+""")
+print('{:>10s} | {:<5s}{:>5s}| {:^10s} | {:^10s}| {:^5s} | {:^5} |'.format('№', 'X(n)', 'X(n+1)', 'X', 'f(X)', 'n', 'err'))
+print('         ---------------------------------------------------------')
 
 #Шаги.
 while a < b:
@@ -33,12 +39,14 @@ while a < b:
                 #print(x0,x2)
                 i += 1
                 if i >= n:
+                    error = 1
                     break
             #print(x0)
             #print(pred_znach, sled_znach)
             number_of_root += 1
             function = fc.func(x0)
-            fc.vivod(x0, number_of_root, pred_znach, sled_znach, function, i)
+            fc.vivod(x0, number_of_root, pred_znach, sled_znach, function, i, error)
+            error = 0
         else:
             #print("proverca_2")
             #print(proverca_1, proverca_2)
@@ -50,8 +58,10 @@ while a < b:
                 #print(x1,x2)
                 i += 1
                 if i >= n:
+                    error = 1
                     break
             #print(x1)
             number_of_root += 1
             function = fc.func(x1)
-            fc.vivod(x1, number_of_root, pred_znach, sled_znach, function, i)
+            fc.vivod(x1, number_of_root, pred_znach, sled_znach, function, i, error)
+            error = 0
