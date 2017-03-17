@@ -17,7 +17,7 @@ def newton1(x):
     return x
 def vivod(x, number_of_root, pred_znach, sled_znach, function, i, error):
     if x >= 0:
-        print('{:>10} | {:<5}{:>5} | {:>10.7f} | {:<5.7f} | {:^5} | {:^5} |'.format(number_of_root, pred_znach, sled_znach, x, function, i, error))
+        print('{:>10} | {:<5}{:>5} | {:>10.7f} | {:<5.3e} | {:^5} | {:^5} |'.format(number_of_root, pred_znach, sled_znach, x, function, i, error))
     else:
-        print('{:>10} | {:<5}{:>5} | {:<5.7f} | {:<5.7f} | {:^5} | {:^5} |'.format(number_of_root, pred_znach, sled_znach, x, function, i, error))
+        print('{:>10} | {:<5}{:>5} | {:<5.7f} | {:<5.3e} | {:^5} | {:^5} |'.format(number_of_root, pred_znach, sled_znach, x, function, i, error))
     
