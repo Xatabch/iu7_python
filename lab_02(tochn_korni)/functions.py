@@ -1,11 +1,12 @@
-import math as mt
+import math as m
 def func(x):
-    return (x**2 - 3)#(x**3 + 4*x - 3)
+    return m.sin(x)#(x**2 - 3)#(x**3 + 4*x - 3)
 def proizv_func(x):
-    return (2 * x)#(3 * x ** 2 + 4)
+    return m.cos(x)#(2 * x)#(3 * x ** 2 + 4)
+
 def second_proizv(x):
-    function = (x**2 - 3)#x ** 3 + 4 * x - 3
-    second = 2#6 * x
+    function = m.sin(x)#(x**2 - 3)#x ** 3 + 4 * x - 3
+    second = -m.sin(x)#6 * x
     result = function * second
     if result > 0:
         return 1
