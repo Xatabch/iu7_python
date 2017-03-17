@@ -7,10 +7,10 @@ import functions as fc
 #import numpy as np
 #import math
 
-a,b = map(float,input('Введите начало и конец отрезка: ').split())
-h = float(input("Введите шаг: "))
-n = int(input("Введите максимальное количество итерраций: "))
-eps1 = float(input("Введите точность: "))
+a,b =float(-2) , float(5) #map(float,input('Введите начало и конец отрезка: ').split())
+h = 0.5#float(input("Введите шаг: "))
+n = 100#int(input("Введите максимальное количество итерраций: "))
+eps1 = 0.01#float(input("Введите точность: "))
 error = 0
 number_of_root = 0
 print("""
@@ -23,48 +23,24 @@ print('{:>10s} | {:<5s}{:>5s}| {:^10s} | {:^9s} | {:^5s} | {:^5} |'.format('№'
 print('         ---------------------------------------------------------')
 
 #Первая часть задания.
-#Шаги.
 while a < b:
     sled_znach = a
     pred_znach = sled_znach
     sled_znach = pred_znach + h
     a += h
-    #print(fc.func(pred_znach),fc.func(sled_znach))
     #Проверка на наличие корней на данном отрезке.
-    if ((fc.func(pred_znach) < 0) and (fc.func(sled_znach) > 0)) or ((fc.func(pred_znach) > 0) and (fc.func(sled_znach) < 0)):
-        #print("Корень найден")
+    if ((fc.func(pred_znach) <= 0) and (fc.func(sled_znach) > 0)) or ((fc.func(pred_znach) > 0) and (fc.func(sled_znach) <= 0)):
         x0 = pred_znach
         x1 = sled_znach
         proverca_1 = fc.second_proizv(x0)
         proverca_2 = fc.second_proizv(x1)
         number_of_root += 1
-#РАЗОБРАТЬСЯ С ДУБЛИРОВАНИЕМ ЦИКЛОВ!!!!!
+        #Уточнение корней.
         if proverca_1:
-            i = 0
-            x2 = fc.newton1(x0)
-            while abs(x2-x0) > eps1:
-                x2 = x0
-                x0 = fc.newton1(x0)
-                #print(x0,x2)
-                i += 1
-                if i >= n:
-                    error = 1
-                    break
-            function = fc.func(x0)
-            fc.vivod(x0, number_of_root, pred_znach, sled_znach, function, i, error)
+            fc.utochnenie(proverca_1,x0,eps1,n,number_of_root,pred_znach,sled_znach,error)
             error = 0
         else:
-            i = 0
-            x2 = fc.newton1(x1)
-            while abs(x2-x1) > eps1:
-                x2 = x1
-                x1 = fc.newton1(x1)
-                i += 1
-                if i >= n:
-                    error = 1
-                    break
-            function = fc.func(x1)
-            fc.vivod(x1, number_of_root, pred_znach, sled_znach, function, i, error)
+            fc.utochnenie(proverca_1,x1,eps1,n,number_of_root,pred_znach,sled_znach,error)
             error = 0
 
 #2 Часть задания.
