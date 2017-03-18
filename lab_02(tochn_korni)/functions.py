@@ -1,11 +1,11 @@
 import math as m
+
 def func(x):
-    return (x**2 - 3)#m.sin(x)#(x**2 - 3)#(x**3 + 4*x - 3)
+    return (x**2 - 4)#m.sin(x)#(x**2 - 3)#(x**3 + 4*x - 3)
 def proizv_func(x):
     return (2 * x)#m.cos(x)#(2 * x)#(3 * x ** 2 + 4)
-
 def second_proizv(x):
-    function = (x**2 - 3)#m.sin(x)#(x**2 - 3)#x ** 3 + 4 * x - 3
+    function = (x**2 - 4)#m.sin(x)#(x**2 - 3)#x ** 3 + 4 * x - 3
     second = 2#-m.sin(x)#6 * x
     result = function * second
     if result > 0:
@@ -13,6 +13,8 @@ def second_proizv(x):
     else:
         return 0
 def newton1(x):
+    #print('X: ',x)
+    #print('Производная функции: ',proizv_func(x))
     x = x - func(x) / proizv_func(x)
     return x
 def utochnenie(proverca,x,eps1,n,number_of_root,pred_znach,sled_znach,error):

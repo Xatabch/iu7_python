@@ -5,10 +5,10 @@ import functions as fc
 #import scipy.misc as misc
 #import matplotlib.pyplot as plt
 #import numpy as np
-#import math
+import math
 
 a,b =float(-2) , float(5) #map(float,input('Введите начало и конец отрезка: ').split())
-h = 0.5#float(input("Введите шаг: "))
+h = 1#float(input("Введите шаг: "))
 n = 100#int(input("Введите максимальное количество итерраций: "))
 eps1 = 0.01#float(input("Введите точность: "))
 error = 0
@@ -29,21 +29,29 @@ while a < b:
     sled_znach = pred_znach + h
     a += h
     #Проверка на наличие корней на данном отрезке.
-    if ((fc.func(pred_znach) <= 0) and (fc.func(sled_znach) > 0)) or ((fc.func(pred_znach) > 0) and (fc.func(sled_znach) <= 0)):
+    #if ((fc.func(pred_znach) < 0) and (fc.func(sled_znach) > 0)) or ((fc.func(pred_znach) > 0) and (fc.func(sled_znach) < 0)) or (fc.func(pred_znach) == 0) or (fc.func(sled_znach) == 0):
+    if (fc.func(pred_znach) * fc.func(sled_znach) < 0) or (fc.func(pred_znach) == 0) or (fc.func(sled_znach) == 0):
+        #print('Предыдущее значение: ',fc.func(pred_znach))
+        #print('Следующее значение: ',fc.func(sled_znach))
+        #print('Шаг: ',a)
         x0 = pred_znach
         x1 = sled_znach
         proverca_1 = fc.second_proizv(x0)
         proverca_2 = fc.second_proizv(x1)
-        number_of_root += 1
+        #print(proverca_1,proverca_2)
         #Уточнение корней.
         if proverca_1:
+            #print('proverca_1')
+            number_of_root += 1
             fc.utochnenie(proverca_1,x0,eps1,n,number_of_root,pred_znach,sled_znach,error)
             error = 0
-        else:
+        elif proverca_2:
+            number_of_root += 1
+            #print('proverca_2')
             fc.utochnenie(proverca_1,x1,eps1,n,number_of_root,pred_znach,sled_znach,error)
             error = 0
 
-#2 Часть задания.
+#Вторая часть задания.
 #print()
 #def f(x):
 #    return math.sin(x)#x**2 - 3
