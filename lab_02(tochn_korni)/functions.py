@@ -2,7 +2,8 @@ import math as m
 import pylab
 from matplotlib import mlab
 import scipy.optimize as sp
-import scipy.misc as misc
+import sympy as sym
+#import scipy.misc as misc
 
 #Функция
 def func(x):
@@ -38,13 +39,6 @@ def utochnenie(proverca,x,eps1,n,number_of_root,pred_znach,sled_znach,error,b,h,
         if i >= n:
             error = 1
             break
-    #if i == 0:
-        #print(a+h)
-    #if pred_znach == (a + h):
-        #pred_znach == a - h
-    #if (pred_znach == 0 and func(pred_znach) == 0) or (sled_znach == 0 and func(sled_znach) == 0):
-        #x = 0.0
-        #i = 1
     d = a
     c = b 
     function = func(x)
@@ -85,13 +79,18 @@ def graph(xmin,xmax):
     x4 = [xmin,xmax]
     y4 = [func(xmin),func(xmax)]
     
-    for i in range(round(abs(xmin-xmax)/h*10)):
-        if abs(misc.derivative(func,xmin+h*i/10)) <= h/10:
-            x2.append(xmin+h*i/10)
-            y2.append(func(xmin+h*i/10))
-        if abs(misc.derivative(func,xmin+h*i/10,1,2)) <= h/10:
-            x3.append(xmin+h*i/10)
-            y3.append(func(xmin+h*i/10)) 
+    x = sym.Symbol('x')
+    f = x**3 - 5*x**2 + 6
+    f_dif = sym.diff(f, x, 1)
+    extr = sym.solve(f_dif, x)
+    for k in extr:
+        x2.append(float(k))
+        y2.append(func(float(k)))
+    f_2dif = sym.diff(f_dif, x, 1)
+    peregib = sym.solve(f_2dif, x)
+    for k in peregib:
+        x3.append(float(k))
+        y3.append(func(float(k)))
 
     rootsx = []
     rootscount = 0
@@ -103,8 +102,9 @@ def graph(xmin,xmax):
         
     pylab.plot(xlist, ylist)
     pylab.grid(True)
-    pylab.plot(rootsx,[0] * rootscount,'bo')
-    pylab.plot(x2,y2,'ro')
-    pylab.plot(x3,y3,'go')
-    pylab.plot(x4,y4,'yo')
+    pylab.plot(rootsx,[0] * rootscount,'bo', label = "Roots")
+    pylab.plot(x2,y2,'ro', label = "Extrema")
+    pylab.plot(x3,y3,'go', label = "Inflection points")
+    pylab.plot(x4,y4,'yo', label = "min/max")
+    pylab.legend()
     pylab.show()
